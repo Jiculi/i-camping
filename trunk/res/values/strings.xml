@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Welcome into iCaming-car Android application !</string>
+    <string name="app_name">Aires.camping.car</string>
+    <string name="add_area">Add area</string>
+     <string name="search_area">Search an area</string>
+     <string name="Electricity">Electricity</string>
+     <string name="GreyWatter">Grey Watter</string>
+      <string name="Toilets">Toilets</string>
+      <string name="CanSleep">Can Sleep</string>
+    <string name="help_translate">Click here to help us for translating this application into your language</string>
+    
+     <string name="from_languages_prompt">Choose a language to translate from</string>
+    <string name="to_languages_prompt">Choose a language to translate to</string>
+    <string name="text_to_translate">The text you wish to translate</string>
+    <string name="translate_button">Translate!</string>
+       <string name="make_test">Make a test</string>
+</resources>

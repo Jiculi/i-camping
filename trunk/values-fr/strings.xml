@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Bienvenue dans l application Android iCaming-car</string>
+    <string name="app_name">Aires.camping.car</string>
+    <string name="add_area">Ajouter une aire</string>
+  <string name="search_area">Rechercher une aire</string>
+  
+     <string name="Electricity">Electricité</string>
+     <string name="GreyWatter">Vidange eaux grises</string>
+      <string name="Toilets">Vidange toilettes</string>
+      <string name="CanSleep">Nuit autorisée</string>
+</resources>

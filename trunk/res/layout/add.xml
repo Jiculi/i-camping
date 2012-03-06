@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sample" />
+
+    <CheckBox
+        android:id="@+id/Electricity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Electricity" />
+
+    <RatingBar
+        android:id="@+id/ratingBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/GreyWatter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/GreyWatter" />
+
+    <CheckBox
+        android:id="@+id/Toilets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Toilets" />
+
+    <CheckBox
+        android:id="@+id/CanSleep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/CanSleep" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@id/spinner1" />
+
+</LinearLayout>
+</ScrollView>
