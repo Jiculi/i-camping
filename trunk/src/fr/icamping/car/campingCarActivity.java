@@ -38,10 +38,10 @@ public class campingCarActivity extends Activity {
 
       public void onClick(View view) {
     	  int actionCode = 0;
-    	  Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-    	    startActivityForResult(takePictureIntent, actionCode);
+    	 // Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    	  //  startActivityForResult(takePictureIntent, actionCode);
 
-    	sendArea.postData();
+    	// sendArea.postData();
     	 // Log.d("YourTag", "YourOutput");
    	Intent intent = new Intent(campingCarActivity.this, addArea.class);
    	startActivity(intent);
