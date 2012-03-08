@@ -14,6 +14,11 @@
         android:layout_height="wrap_content"
         android:src="@drawable/sample" />
 
+    <Spinner
+        android:id="@+id/spinnerDepartement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <CheckBox
         android:id="@+id/Electricity"
         android:layout_width="wrap_content"
@@ -42,12 +47,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/CanSleep" />
-
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:prompt="@id/spinner1" />
 
 </LinearLayout>
 </ScrollView>
