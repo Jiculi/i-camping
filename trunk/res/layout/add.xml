@@ -48,5 +48,26 @@
         android:layout_height="wrap_content"
         android:text="@string/CanSleep" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+         <Button android:id="@+id/okButton"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="Envoyer"
+    />
+    <Button android:id="@+id/cancelButton"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="Enregistrer"
+    />
+    <Button android:id="@+id/cancelButton"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="Annuler"
+    />
+    </LinearLayout>
+    
 </LinearLayout>
 </ScrollView>
