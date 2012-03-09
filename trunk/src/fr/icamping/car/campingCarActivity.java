@@ -1,16 +1,23 @@
 package fr.icamping.car;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class campingCarActivity extends Activity {
     /** Called when the activity is first created. */
+
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +44,9 @@ public class campingCarActivity extends Activity {
       buttonAddArea.setOnClickListener(new android.view.View.OnClickListener() {
 
       public void onClick(View view) {
-    	  int actionCode = 0;
-    	 // Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-    	  //  startActivityForResult(takePictureIntent, actionCode);
-
     	// sendArea.postData();
     	 // Log.d("YourTag", "YourOutput");
+    	  Log.d("Yann", "Lancement addArea ");
    	Intent intent = new Intent(campingCarActivity.this, addArea.class);
    	startActivity(intent);
     	
@@ -50,6 +54,9 @@ public class campingCarActivity extends Activity {
       }
      );
     }
+  
 }
+
+
 
 
