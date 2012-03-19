@@ -1,6 +1,11 @@
 package fr.icamping.car;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -12,6 +17,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Camera;
+import android.hardware.Camera.PictureCallback;
+import android.hardware.Camera.ShutterCallback;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -26,33 +34,26 @@ public class addArea extends Activity {
     /** Called when the activity is first created. */
 	private Uri mImageCaptureUri;
 	Spinner updateFreqSpinner;
-	private static final int PICK_FROM_CAMERA = 1;
-	 ImageView imageiewImageCaptured;
+	ImageView imageiewImageCaptured;
+	private String mCurrentPhotoPath;
+	 private static final String JPEG_FILE_PREFIX = "IMG_";
+     private static final String JPEG_FILE_SUFFIX = ".jpg";
+     private AlbumStorageDirFactory mAlbumStorageDirFactory = null;
+
+
 	@Override
 	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	  // TODO Auto-generated method stub
 	  super.onActivityResult(requestCode, resultCode, data);
 	   
 	  if (resultCode == RESULT_OK)
 	  {
-		    imageiewImageCaptured = (ImageView)findViewById(R.id.photoResultView);
-		      
+	   imageiewImageCaptured = (ImageView)findViewById(R.id.photoResultView);     
 	   Bundle extras = data.getExtras();
 	   Bitmap bmp = (Bitmap) extras.get("data");
 	   imageiewImageCaptured.setImageBitmap(bmp);
-	  }
 	   
+	  }
 	 }
-	/*
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	
-		    	mImageCaptureUri = data.getData();
-		    	Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-     		    ImageView image = (ImageView) findViewById(R.id.photoResultView);
-     		    image.setImageBitmap(thumbnail);
-	    }
-	   */
-	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,38 +61,63 @@ public class addArea extends Activity {
         setContentView(R.layout.add);
         updateFreqSpinner = (Spinner)findViewById(R.id.spinnerDepartement);
         populateSpinners();
-        Log.d("Yann", "Lancement make_picture");
-        make_picture();
-        
-     
+        make_picture();  
     }
-       
-    private void make_picture() {
-    	/*
-    	//define the file-name to save photo taken by Camera activity
-    	String fileName = "new-photo-name.jpg";
-    	//create parameters for Intent with filename
-    	ContentValues values = new ContentValues();
-    	values.put(MediaStore.Images.Media.TITLE, fileName);
-    	values.put(MediaStore.Images.Media.DESCRIPTION,"Image capture by camera");
-    	//imageUri is the current activity attribute, define and save it for later usage (also in onSaveInstanceState)
-    	
-    	mImageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
-				   "tmp_avatar_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
+    /* Photo album for this application */
+    private String getAlbumName() {
+            return getString(R.string.album_name);
+    }
 
-    	Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-    	intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
-    	intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-    	try {
-			intent.putExtra("return-data", true);
-			startActivityForResult(intent, PICK_FROM_CAMERA);
-		} catch (ActivityNotFoundException e) {
+
+    private File getAlbumDir() {
+            File storageDir = null;
+
+            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+
+                    storageDir = mAlbumStorageDirFactory.getAlbumStorageDir(getAlbumName());
+
+                    if (storageDir != null) {
+                            if (! storageDir.mkdirs()) {
+                                    if (! storageDir.exists()){
+                                            Log.d("CameraSample", "failed to create directory");
+                                            return null;
+                                    }
+                            }
+                    }
+
+            } else {
+                    Log.v(getString(R.string.app_name), "External storage is not mounted READ/WRITE.");
+            }
+
+            return storageDir;
+    }
+
+    
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = 
+            new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = JPEG_FILE_PREFIX + timeStamp + "_";
+        File image = File.createTempFile(
+            imageFileName, 
+            JPEG_FILE_SUFFIX, 
+            getAlbumDir()
+        );
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+  
+    private void make_picture() {
+    	  Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+    	  startActivityForResult(intent, 0);
+    	  File f = null;
+		try {
+			f = createImageFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-       */
-    	  Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-    	   startActivityForResult(intent, 0);
-    	   
+    	  intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
     	}
     
     private void populateSpinners() { 
@@ -103,4 +129,5 @@ public class addArea extends Activity {
     
     }
 
+  
 }
