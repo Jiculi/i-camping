@@ -16,4 +16,6 @@
     <string name="text_to_translate">The text you wish to translate</string>
     <string name="translate_button">Translate!</string>
        <string name="make_test">Make a test</string>
+        <string name="album_name">i-Camping</string>
+       
 </resources>
