@@ -69,31 +69,10 @@ public class addArea extends Activity {
     }
 
 
-    private File getAlbumDir() {
-            File storageDir = null;
-
-            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-
-                    storageDir = mAlbumStorageDirFactory.getAlbumStorageDir(getAlbumName());
-
-                    if (storageDir != null) {
-                            if (! storageDir.mkdirs()) {
-                                    if (! storageDir.exists()){
-                                            Log.d("CameraSample", "failed to create directory");
-                                            return null;
-                                    }
-                            }
-                    }
-
-            } else {
-                    Log.v(getString(R.string.app_name), "External storage is not mounted READ/WRITE.");
-            }
-
-            return storageDir;
-    }
-
+  
     
     private File createImageFile() throws IOException {
+    	File Repertoire = new File("/sdcard/");
         // Create an image file name
         String timeStamp = 
             new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -101,9 +80,10 @@ public class addArea extends Activity {
         File image = File.createTempFile(
             imageFileName, 
             JPEG_FILE_SUFFIX, 
-            getAlbumDir()
+            Repertoire
         );
         mCurrentPhotoPath = image.getAbsolutePath();
+        Log.d("Yann", imageFileName);
         return image;
     }
   
