@@ -27,7 +27,7 @@ public class campingCarActivity extends Activity {
      //startActivity(intent);
            
       Button buttonAddArea=(Button)findViewById(R.id.ButtonAddArea);
-      Button buttonTest=(Button)findViewById(R.id.ButtonTest);
+ /*     Button buttonTest=(Button)findViewById(R.id.ButtonTest);
      
       buttonTest.setOnClickListener(new android.view.View.OnClickListener() {
 
@@ -40,13 +40,14 @@ public class campingCarActivity extends Activity {
       }
       }
       );
+      */
       
       buttonAddArea.setOnClickListener(new android.view.View.OnClickListener() {
 
       public void onClick(View view) {
     	// sendArea.postData();
     	 // Log.d("YourTag", "YourOutput");
-    	  Log.d("Yann", "Lancement addArea ");
+    	//  Log.d("Yann", "Lancement addArea ");
    	Intent intent = new Intent(campingCarActivity.this, addArea.class);
    	startActivity(intent);
     	

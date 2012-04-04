@@ -166,7 +166,7 @@ public class addArea extends Activity {
             Repertoire
         );
         mCurrentPhotoPath = image.getAbsolutePath();
-        Log.d("Yann", imageFileName);
+       // Log.d("Yann", imageFileName);
         return image;
     }
     private void dispatchTakePictureIntent(int actionCode) {
