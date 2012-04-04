@@ -59,7 +59,6 @@ public class addArea extends Activity {
         populateSpinners();
         mAlbumStorageDirFactory = new BaseAlbumDirFactory();
         mImageView = (ImageView)findViewById(R.id.photoResultView);     
-        //make_picture();
         dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
     }
     /* Photo album for this application */
