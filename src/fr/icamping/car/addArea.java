@@ -1,27 +1,14 @@
 package fr.icamping.car;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-
-
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Camera;
-import android.hardware.Camera.PictureCallback;
-import android.hardware.Camera.ShutterCallback;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,11 +18,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class addArea extends Activity {
     /** Called when the activity is first created. */
-	private Uri mImageCaptureUri;
+	
 	Spinner updateFreqSpinner;
 	ImageView imageiewImageCaptured;
 	private static final int ACTION_TAKE_PHOTO_B = 1;
@@ -44,7 +30,7 @@ public class addArea extends Activity {
      private static final String JPEG_FILE_SUFFIX = ".jpg";
      private AlbumStorageDirFactory mAlbumStorageDirFactory = null;
      private ImageView mImageView;
- 	private Bitmap mImageBitmap;
+ 	
      
 	@Override
 	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
