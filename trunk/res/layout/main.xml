@@ -19,12 +19,30 @@
         android:layout_marginTop="30dp"
         android:text="@string/add_area" />
 
+      <Button
+        android:id="@+id/ButtonAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="30dp"
+        android:text="@string/about" />
+    <Button
+        android:id="@+id/ButtonExit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="30dp"
+        android:text="@string/exit" />
+
+<!-- 
+
     <Button
         android:id="@+id/ButtonSearchArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
               android:layout_marginTop="30dp"
         android:text="@string/search_area" />
+         -->
 <!--
       <Button
         android:id="@+id/ButtonTest"
