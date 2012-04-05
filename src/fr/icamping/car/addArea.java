@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +18,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -60,11 +63,41 @@ public class addArea extends Activity {
         mAlbumStorageDirFactory = new BaseAlbumDirFactory();
         mImageView = (ImageView)findViewById(R.id.photoResultView);     
         dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
+        Button buttonSearchArea = (Button) findViewById(R.id.cancelButton);
+        buttonSearchArea.setOnClickListener(new android.view.View.OnClickListener() {
+            public void onClick(View view) {
+           	 Log.d("Yann", "exit 1");
+            	exitAddArea();
+            	
+            	
+            }
+        }
+        );
     }
     /* Photo album for this application */
     private String getAlbumName() {
             return getString(R.string.album_name);
     }
+    
+    private void exitAddArea()
+	{
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	builder.setMessage("Are you sure you want to cancel ?")
+    	       .setCancelable(false)
+    	       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    	           public void onClick(DialogInterface dialog, int id) {
+    	        	   addArea.this.finish();
+    	           }
+    	       })
+    	       .setNegativeButton("No", new DialogInterface.OnClickListener() {
+    	           public void onClick(DialogInterface dialog, int id) {
+    	                dialog.cancel();
+    	           }
+    	       });
+    	AlertDialog alert = builder.create();
+    	builder.show();
+	}
 
     private void galleryAddPic() {
 	    Intent mediaScanIntent = new Intent("android.intent.action.MEDIA_SCANNER_SCAN_FILE");
@@ -85,21 +118,21 @@ public class addArea extends Activity {
 
 		/* Get the size of the image */
 		BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-		bmOptions.inJustDecodeBounds = true;
+		// bmOptions.inJustDecodeBounds = true;
 		BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-		int photoW = bmOptions.outWidth;
-		int photoH = bmOptions.outHeight;
+		// int photoW = bmOptions.outWidth;
+		// nt photoH = bmOptions.outHeight;
 		
 		/* Figure out which way needs to be reduced less */
-		int scaleFactor = 1;
-		if ((targetW > 0) || (targetH > 0)) {
-			scaleFactor = Math.min(photoW/targetW, photoH/targetH);	
-		}
+		//int scaleFactor = 1;
+		//if ((targetW > 0) || (targetH > 0)) {
+		//	scaleFactor = Math.min(photoW/targetW, photoH/targetH);	
+		//}
 
 		/* Set bitmap options to scale the image decode target */
-		bmOptions.inJustDecodeBounds = false;
-		bmOptions.inSampleSize = scaleFactor;
-		bmOptions.inPurgeable = true;
+		// bmOptions.inJustDecodeBounds = false;
+		// bmOptions.inSampleSize = scaleFactor;
+		// bmOptions.inPurgeable = true;
 
 		/* Decode the JPEG file into a Bitmap */
 		Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);

@@ -17,5 +17,11 @@
     <string name="translate_button">Translate!</string>
        <string name="make_test">Make a test</string>
         <string name="album_name">i-Camping</string>
+        <string name="exit">Exit</string>
+        <string name="yes">Yes</string>
+         <string name="no">No</string>
+        <string name="about">About</string>
+        <string name="sureExit">Are you sure you want to exit?</string>
+          <string name="about_text">This application adds area to i-campingcar.fr website. the 2.0 release should add an search area tool</string>
        
 </resources>
