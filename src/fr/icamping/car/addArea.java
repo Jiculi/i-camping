@@ -37,22 +37,41 @@ public class addArea extends Activity {
      
 	@Override
 	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	  super.onActivityResult(requestCode, resultCode, data);
+	
 	   
-	  if (resultCode == RESULT_OK)
+	  if (resultCode == RESULT_OK) 
 	  {
+		  /*
 		 
-	 //  imageiewImageCaptured = (ImageView)findViewById(R.id.photoResultView);     
-	 //  Bundle extras = data.getExtras();
-	  // Bitmap bmp = (Bitmap) extras.get("data");
-	  //  imageiewImageCaptured.setImageBitmap(bmp);
+		  if(data != null)
+		  {
+	  imageiewImageCaptured = (ImageView)findViewById(R.id.photoResultView);     
+	  Bundle extras = data.getExtras();
+	  Bitmap bmp = (Bitmap) extras.get("data");
+	  imageiewImageCaptured.setImageBitmap(bmp);
+		  }
+		  else
+		  {
+			  AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		    	builder.setMessage("Error data is null !");
+		    	builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {  
+		  	      public void onClick(DialogInterface dialog, int which) {  
+		  	        return;  
+		  	    } });   
+		    	AlertDialog alert = builder.create();
+		    	
+		    	builder.show();
+		  }
+		  
+	*/
 	   if (mCurrentPhotoPath != null) {
 			setPic();
 			galleryAddPic();
 			mCurrentPhotoPath = null;
 		}
 	  }
-	 }
+	}
+
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,13 +132,13 @@ public class addArea extends Activity {
 		/* So pre-scale the target bitmap into which the file is decoded */
 
 		/* Get the size of the ImageView */
-		int targetW = mImageView.getWidth();
-		int targetH = mImageView.getHeight();
+		// int targetW = mImageView.getWidth();
+		// int targetH = mImageView.getHeight();
 
 		/* Get the size of the image */
-		BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+		// BitmapFactory.Options bmOptions = new BitmapFactory.Options();
 		// bmOptions.inJustDecodeBounds = true;
-		BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+		// BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
 		// int photoW = bmOptions.outWidth;
 		// nt photoH = bmOptions.outHeight;
 		
@@ -135,7 +154,7 @@ public class addArea extends Activity {
 		// bmOptions.inPurgeable = true;
 
 		/* Decode the JPEG file into a Bitmap */
-		Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+		Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, null);
 		
 		/* Associate the Bitmap to the ImageView */
 		mImageView.setImageBitmap(bitmap);
