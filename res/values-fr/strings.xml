@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Bienvenue dans l application Android iCaming-car</string>
+    <string name="hello">Bienvenue dans l\' application iCamping-car</string>
     <string name="app_name">Aires.camping.car</string>
     <string name="add_area">Ajouter une aire</string>
   <string name="search_area">Rechercher une aire</string>
@@ -11,9 +11,13 @@
       <string name="Toilets">Vidange toilettes</string>
       <string name="CanSleep">Nuit autorisée</string>
       <string name="about">à propos</string>
-      <string name="Quitter"></string>
+      <string name="exit">Quitter</string>
       <string name="yes">Oui</string>
       <string name="no">Non</string>
-      <string name="about_text">Cette application vous permet d\'ajouter des aires sur le site i-campingcar.fr. La version 2.0 permetra de trouver les aires</string>
+      <string name="about_text">Cette application vous permet d\'ajouter des aires sur le site i-campingcar.fr\nLa version 2.0 permetra de trouver les aires</string>
            <string name="sureExit">Voulez-vous vraiement quitter ?</string>
+           <string name="TakePicture">Prendre une photo</string>
+           <string name="Send">Envoyer</string>
+           <string name="Save">Sauvegarder</string>
+           <string name="Cancel">Anuller</string>
 </resources>

@@ -41,11 +41,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/CanSleep" />
-
+    
+ <Button android:id="@+id/takePictureButton"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="@string/TakePicture"
+    />
+ 
        <ImageView
         android:id="@+id/photoResultView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/sample"
          />
 
        
@@ -56,17 +63,17 @@
          <Button android:id="@+id/okButton"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="Envoyer"
+      android:text="@string/Send"
     />
     <Button android:id="@+id/recordButton"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="Enregistrer"
+      android:text="@string/Save"
     />
     <Button android:id="@+id/cancelButton"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:text="Annuler"
+      android:text="@string/Cancel"
     />
     </LinearLayout>
     

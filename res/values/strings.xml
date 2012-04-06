@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Welcome into iCaming-car Android application !</string>
+    <string name="hello">Welcome into iCamping-car application !</string>
     <string name="app_name">Aires.camping.car</string>
     <string name="add_area">Add area</string>
      <string name="search_area">Search an area</string>
@@ -22,6 +22,10 @@
          <string name="no">No</string>
         <string name="about">About</string>
         <string name="sureExit">Are you sure you want to exit?</string>
-          <string name="about_text">This application adds area to i-campingcar.fr website. the 2.0 release should add an search area tool</string>
+          <string name="about_text">This application adds area to i-campingcar.fr website.\nThe 2.0 release should add an search area tool</string>
+          <string name="TakePicture">Take a picture</string>
+          <string name="Send">Send</string>
+          <string name="Save">Save</string>
+          <string name="Cancel">Cancel</string>
        
 </resources>
