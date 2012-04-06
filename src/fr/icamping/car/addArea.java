@@ -118,14 +118,14 @@ public class addArea extends Activity {
 	{
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage("Are you sure you want to cancel ?")
+    	builder.setMessage(R.string.SureCancel)
     	       .setCancelable(false)
-    	       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    	       .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	        	   addArea.this.finish();
     	           }
     	       })
-    	       .setNegativeButton("No", new DialogInterface.OnClickListener() {
+    	       .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
     	           public void onClick(DialogInterface dialog, int id) {
     	                dialog.cancel();
     	           }
@@ -143,43 +143,29 @@ public class addArea extends Activity {
 }
 
     private void setPic() {
-
-		/* There isn't enough memory to open up more than a couple camera photos */
-		/* So pre-scale the target bitmap into which the file is decoded */
-
-		/* Get the size of the ImageView */
-		int targetW = mImageView.getWidth();
-		int targetH = mImageView.getHeight();
-
-		Log.d("Yann", "targetW 2 : "+targetW);
-		Log.d("Yann", "targetH 2 : "+targetH);
-		/* Get the size of the image */
-		BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-		bmOptions.inJustDecodeBounds = true;
-		BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-		int photoW = bmOptions.outWidth;
-		int photoH = bmOptions.outHeight;
-		
-		/* Figure out which way needs to be reduced less */
-		int scaleFactor = 1;
-		if ((targetW > 0) || (targetH > 0)) {
-			scaleFactor = Math.min(photoW/targetW, photoH/targetH);	
-		}
-
-		/* Set bitmap options to scale the image decode target */
-		 bmOptions.inJustDecodeBounds = false;
-		 bmOptions.inSampleSize = scaleFactor;
-		 bmOptions.inPurgeable = true;
-
-		/* Decode the JPEG file into a Bitmap */
-		Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, null);
-		
-		/* Associate the Bitmap to the ImageView */
-		mImageView.setImageBitmap(bitmap);
-
-		mImageView.setVisibility(View.VISIBLE);
-
-	}
+        // Get the dimensions of the View
+        int targetW = mImageView.getWidth();
+        int targetH = mImageView.getHeight();
+        printMessage(""+targetW);
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+      
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+      
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+      
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        mImageView.setImageBitmap(bitmap);
+    }
+    
     private File getAlbumDir() {
 		File storageDir = null;
 
@@ -260,5 +246,19 @@ public class addArea extends Activity {
     
     }
 
+    private void printMessage (String message)
+    {
+    	Log.d("Yann", "printMessage :"+message);
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    	builder.setMessage(message);
+    	builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {  
+  	      public void onClick(DialogInterface dialog, int which) {  
+  	        return;  
+  	    } });   
+    	AlertDialog alert = builder.create();
+    	
+    	builder.show();
+    }
+    
   
 }
