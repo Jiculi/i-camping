@@ -27,5 +27,6 @@
           <string name="Send">Send</string>
           <string name="Save">Save</string>
           <string name="Cancel">Cancel</string>
+          <string name="SureCancel">Are you sure you want to cancel ?</string>
        
 </resources>

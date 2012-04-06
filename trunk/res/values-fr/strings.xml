@@ -19,5 +19,6 @@
            <string name="TakePicture">Prendre une photo</string>
            <string name="Send">Envoyer</string>
            <string name="Save">Sauvegarder</string>
-           <string name="Cancel">Anuller</string>
+           <string name="Cancel">Annuler</string>
+           <string name="SureCancel">Etes-vous sûr de vouloir annuler ?</string>
 </resources>
