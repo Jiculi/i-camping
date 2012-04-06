@@ -80,12 +80,28 @@ public class addArea extends Activity {
         updateFreqSpinner = (Spinner)findViewById(R.id.spinnerDepartement);
         populateSpinners();
         mAlbumStorageDirFactory = new BaseAlbumDirFactory();
-        mImageView = (ImageView)findViewById(R.id.photoResultView);     
-        dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
+        mImageView = (ImageView)findViewById(R.id.photoResultView);  		
+		
+		 Button buttonTakePicture = (Button) findViewById(R.id.takePictureButton);
+        buttonTakePicture.setOnClickListener(new android.view.View.OnClickListener() {
+            public void onClick(View view) {
+            	dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
+            	int targetW = mImageView.getMeasuredHeight();
+        		int targetH = mImageView.getHeight();
+
+        		Log.d("Yann", "targetW 1 : "+targetW);
+        		Log.d("Yann", "targetH 1 : "+targetH);
+           	
+         
+            	
+            	
+            }
+        }
+        );
+      
         Button buttonSearchArea = (Button) findViewById(R.id.cancelButton);
         buttonSearchArea.setOnClickListener(new android.view.View.OnClickListener() {
             public void onClick(View view) {
-           	 Log.d("Yann", "exit 1");
             	exitAddArea();
             	
             	
@@ -132,26 +148,28 @@ public class addArea extends Activity {
 		/* So pre-scale the target bitmap into which the file is decoded */
 
 		/* Get the size of the ImageView */
-		// int targetW = mImageView.getWidth();
-		// int targetH = mImageView.getHeight();
+		int targetW = mImageView.getWidth();
+		int targetH = mImageView.getHeight();
 
+		Log.d("Yann", "targetW 2 : "+targetW);
+		Log.d("Yann", "targetH 2 : "+targetH);
 		/* Get the size of the image */
-		// BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-		// bmOptions.inJustDecodeBounds = true;
-		// BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-		// int photoW = bmOptions.outWidth;
-		// nt photoH = bmOptions.outHeight;
+		BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+		bmOptions.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+		int photoW = bmOptions.outWidth;
+		int photoH = bmOptions.outHeight;
 		
 		/* Figure out which way needs to be reduced less */
-		//int scaleFactor = 1;
-		//if ((targetW > 0) || (targetH > 0)) {
-		//	scaleFactor = Math.min(photoW/targetW, photoH/targetH);	
-		//}
+		int scaleFactor = 1;
+		if ((targetW > 0) || (targetH > 0)) {
+			scaleFactor = Math.min(photoW/targetW, photoH/targetH);	
+		}
 
 		/* Set bitmap options to scale the image decode target */
-		// bmOptions.inJustDecodeBounds = false;
-		// bmOptions.inSampleSize = scaleFactor;
-		// bmOptions.inPurgeable = true;
+		 bmOptions.inJustDecodeBounds = false;
+		 bmOptions.inSampleSize = scaleFactor;
+		 bmOptions.inPurgeable = true;
 
 		/* Decode the JPEG file into a Bitmap */
 		Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, null);

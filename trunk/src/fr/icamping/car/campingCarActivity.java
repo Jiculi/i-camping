@@ -43,7 +43,7 @@ public class campingCarActivity extends Activity {
 	private void aboutIcamping()
 	{
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    	builder.setMessage(getString(R.string.about_text));
+    	builder.setMessage(getString(R.string.about_text)+"\n Free software (GPL Licence) \n Copyright 2012 Yann Le Doaré \n Source code : http://code.google.com/p/dibab");
     	builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {  
   	      public void onClick(DialogInterface dialog, int which) {  
   	        return;  
@@ -61,10 +61,7 @@ public class campingCarActivity extends Activity {
         Button buttonExit = (Button) findViewById(R.id.ButtonExit);
         buttonExit.setOnClickListener(new android.view.View.OnClickListener() {
             public void onClick(View view) {
-        
-            	exitIcamping();
-            	
-            	
+            	exitIcamping();          	
             }
         }
         );
