@@ -7,10 +7,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -25,7 +28,7 @@ import android.widget.Spinner;
 public class addArea extends Activity {
     /** Called when the activity is first created. */
 	
-	Spinner updateFreqSpinner;
+	Spinner DptSpinner,KmDeSpinner,OrientationSpinner;
 	ImageView imageiewImageCaptured;
 	private static final int ACTION_TAKE_PHOTO_B = 1;
 	private String mCurrentPhotoPath;
@@ -77,12 +80,31 @@ public class addArea extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add);
-        updateFreqSpinner = (Spinner)findViewById(R.id.spinnerDepartement);
+        DptSpinner = (Spinner)findViewById(R.id.spinnerDepartement);
+        OrientationSpinner = (Spinner)findViewById(R.id.spinnerOrientation);
+        KmDeSpinner = (Spinner)findViewById(R.id.spinnerKmde);
+        
         populateSpinners();
         mAlbumStorageDirFactory = new BaseAlbumDirFactory();
         mImageView = (ImageView)findViewById(R.id.photoResultView);  		
 		
-		 Button buttonTakePicture = (Button) findViewById(R.id.takePictureButton);
+        Button buttonFindLocation = (Button) findViewById(R.id.findLocationButton);
+        buttonFindLocation.setOnClickListener(new android.view.View.OnClickListener() {
+            public void onClick(View view) {
+            	
+            	LocationManager locationManager;
+            	locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            	String provider= LocationManager.GPS_PROVIDER;
+            	Location location=locationManager.getLastKnownLocation(provider);
+            	
+            	Log.d("Yann", "longitude : "+location.getLongitude());
+            	
+            	
+            }
+        }
+        );
+        
+		Button buttonTakePicture = (Button) findViewById(R.id.takePictureButton);
         buttonTakePicture.setOnClickListener(new android.view.View.OnClickListener() {
             public void onClick(View view) {
             	dispatchTakePictureIntent(ACTION_TAKE_PHOTO_B);
@@ -238,11 +260,20 @@ public class addArea extends Activity {
    
     
     private void populateSpinners() { 
-    	ArrayAdapter<CharSequence> fAdapter;
-	    fAdapter = ArrayAdapter.createFromResource(this, R.array.departements,  android.R.layout.simple_spinner_item);
+    	ArrayAdapter<CharSequence> dAdapter,oAdapter,kAdapter;
 	    int spinner_dd_item = android.R.layout.simple_spinner_dropdown_item;
-	    fAdapter.setDropDownViewResource(spinner_dd_item);
-	    updateFreqSpinner.setAdapter(fAdapter);
+	   
+	    dAdapter = ArrayAdapter.createFromResource(this, R.array.departements,  android.R.layout.simple_spinner_item);
+	    dAdapter.setDropDownViewResource(spinner_dd_item);
+	    DptSpinner.setAdapter(dAdapter);
+	    
+	    oAdapter = ArrayAdapter.createFromResource(this, R.array.orientation,  android.R.layout.simple_spinner_item);
+	    oAdapter.setDropDownViewResource(spinner_dd_item);
+	    OrientationSpinner.setAdapter(oAdapter);
+	    
+	    kAdapter = ArrayAdapter.createFromResource(this, R.array.kmde,  android.R.layout.simple_spinner_item);
+	    oAdapter.setDropDownViewResource(spinner_dd_item);
+	    KmDeSpinner.setAdapter(kAdapter);
     
     }
 
