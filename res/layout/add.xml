@@ -13,16 +13,117 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right" >
+
+         <TextView
+        android:id="@+id/commune"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Commune : " />
+         <EditText
+        android:id="@+id/Commune"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" />
+         
+    </LinearLayout>
+     
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right" >
+         
+         <TextView
+        android:id="@+id/situtation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Distance (km)" />
+         
+         <Spinner
+        android:id="@+id/spinnerKmde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+          </LinearLayout>
+          <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right" >
+          
+         <TextView
+        android:id="@+id/orientation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Orientation : " />
+          <Spinner
+        android:id="@+id/spinnerOrientation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+          </LinearLayout>
+           <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right" >
+        
+                 
+         <TextView
+        android:id="@+id/de"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="De : " />
+         
+          <EditText
+        android:id="@+id/Localisation0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" />
+  		</LinearLayout>
+    
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right" >
+
+     
+                 
+         <TextView
+        android:id="@+id/gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPS : Lon/La" />
+         
+         <Button android:id="@+id/findLocationButton"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:text="Find"
+    />
+          <EditText
+        android:id="@+id/gpsLon"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:ems="10"
+         android:inputType="numberDecimal"
+         />
+
+  		
+  		<EditText
+        android:id="@+id/gpsLa"
+        android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:ems="10"
+         android:inputType="numberDecimal" />
+  		
+  </LinearLayout>
+    
     <CheckBox
         android:id="@+id/Electricity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Electricity" />
-
-    <RatingBar
-        android:id="@+id/ratingBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <CheckBox
         android:id="@+id/GreyWatter"
