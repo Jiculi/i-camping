@@ -10,10 +10,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class addArea extends Activity {
     /** Called when the activity is first created. */
@@ -37,7 +42,18 @@ public class addArea extends Activity {
      private AlbumStorageDirFactory mAlbumStorageDirFactory = null;
      private ImageView mImageView;
  	
-     
+     // Location
+     private LocationManager locationManager;
+ 	private LocationListener listenerCoarse;
+ 	private LocationListener listenerFine;
+ 	
+ 	// Holds the most up to date location. 
+ 	private Location currentLocation;
+ 	
+ 	// Set to false when location services are 
+ 	// unavailable. 
+ 	private boolean locationAvailable = true;
+ 	// End location 
 	@Override
 	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	
@@ -74,7 +90,10 @@ public class addArea extends Activity {
 		}
 	  }
 	}
+	
+	 
 
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,13 +111,9 @@ public class addArea extends Activity {
         buttonFindLocation.setOnClickListener(new android.view.View.OnClickListener() {
             public void onClick(View view) {
             	
-            	LocationManager locationManager;
-            	locationManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
-            	String provider= LocationManager.GPS_PROVIDER;
-            	Location location=locationManager.getLastKnownLocation(provider);
-            	
-            	Log.d("Yann", "longitude : "+location.getLongitude());
-            	
+            	  registerLocationListeners();
+            	  
+      
             	
             }
         }
@@ -113,8 +128,6 @@ public class addArea extends Activity {
 
         		Log.d("Yann", "targetW 1 : "+targetW);
         		Log.d("Yann", "targetH 1 : "+targetH);
-           	
-         
             	
             	
             }
@@ -287,9 +300,107 @@ public class addArea extends Activity {
   	        return;  
   	    } });   
     	AlertDialog alert = builder.create();
-    	
     	builder.show();
     }
+    
+    private void registerLocationListeners() {
+		locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+		
+		// Initialize criteria for location providers
+		Criteria fine = new Criteria();
+		fine.setAccuracy(Criteria.ACCURACY_FINE);
+		Criteria coarse = new Criteria();
+		coarse.setAccuracy(Criteria.ACCURACY_COARSE);
+		
+		// Get at least something from the device,
+		// could be very inaccurate though
+		currentLocation = locationManager.getLastKnownLocation(
+			locationManager.getBestProvider(fine, true));
+		
+		if (listenerFine == null || listenerCoarse == null)
+			createLocationListeners();
+			
+		// Will keep updating about every 500 ms until 
+		// accuracy is about 1000 meters to get quick fix.
+		locationManager.requestLocationUpdates(
+			locationManager.getBestProvider(coarse, true), 
+			500, 1000, listenerCoarse);
+		// Will keep updating about every 500 ms until 
+		// accuracy is about 50 meters to get accurate fix.
+		locationManager.requestLocationUpdates(
+			locationManager.getBestProvider(fine, true), 
+			500, 50, listenerFine);
+		 TextView Textlon = (TextView) findViewById(R.id.gpsLon);
+		 TextView Textlat = (TextView) findViewById(R.id.gpsLat);
+		  Textlon.setText("null");
+		  Textlat.setText("null");
+		if(currentLocation != null)
+		{
+			
+			   Textlon.setText(currentLocation.getLatitude()+"");
+			   Textlon.setText(currentLocation.getLongitude()+"");
+		}
+		
+		   
+
+	}
+
+	/**
+	* 	Creates LocationListeners
+	*/
+	private void createLocationListeners() {
+		 Log.d("Yann", "into createLocationListeners" );
+		listenerCoarse = new LocationListener() {
+			public void onStatusChanged(String provider, 
+				int status, Bundle extras) {
+				TextView Textlon = (TextView) findViewById(R.id.gpsLon);
+				   Textlon.setText(""+status);
+				switch(status) {
+				  
+				case LocationProvider.OUT_OF_SERVICE:
+				case LocationProvider.TEMPORARILY_UNAVAILABLE:
+					locationAvailable = false;
+					break;
+				case LocationProvider.AVAILABLE:
+					locationAvailable = true;
+				}
+			}
+			public void onProviderEnabled(String provider) {
+			}
+			public void onProviderDisabled(String provider) {
+			}
+			public void onLocationChanged(Location location) {
+				currentLocation = location;
+				if (location.getAccuracy() > 1000 && 
+					location.hasAccuracy())
+					locationManager.removeUpdates(this);
+			}
+		};
+		listenerFine = new LocationListener() {
+			public void onStatusChanged(String provider, 
+				int status, Bundle extras) {
+				switch(status) {
+				case LocationProvider.OUT_OF_SERVICE:
+				case LocationProvider.TEMPORARILY_UNAVAILABLE:
+					locationAvailable = false;
+					break;
+				case LocationProvider.AVAILABLE:
+					locationAvailable = true;
+				}
+			}
+			public void onProviderEnabled(String provider) {
+			}
+			public void onProviderDisabled(String provider) {
+			}
+			public void onLocationChanged(Location location) {
+				currentLocation = location;
+				if (location.getAccuracy() > 1000 
+					&& location.hasAccuracy())
+					locationManager.removeUpdates(this);
+			}
+		};
+	}
+	
     
   
 }
